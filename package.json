@@ -1,0 +1,29 @@
+{
+  "name": "honostrapper",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "simple CLI for bootstapping hono REST API projects",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning index.js"
+  },
+  "keywords": [
+    "cli",
+    "bootstrap",
+    "hono"
+  ],
+  "files": [
+    "index.js",
+    "utilities",
+    "templates"
+  ],
+  "bin": {
+    "honostrapper": "index"
+  },
+  "author": "victor orlunda",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "ora": "^8.2.0"
+  }
+}
