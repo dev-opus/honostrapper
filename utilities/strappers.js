@@ -1,14 +1,17 @@
 import { createFiles } from './files.js';
+import { writeFileSync } from 'node:fs';
 
 import * as Commons from '../templates/commons/index.js';
 import * as Config from '../templates/config/index.js';
 import * as Services from '../templates/services/index.js';
 import { entrypoint } from '../templates/entrypoint.js';
+import { tsconfig } from '../templates/tsconfig.js';
 
 export function bootstrap() {
-  createFiles('./src/commons/', Commons);
-  createFiles('./src/config/', Config);
-  createFiles('./src/', { index: entrypoint() });
+  createFiles('./src/commons/', Commons, true);
+  createFiles('./src/config/', Config, true);
+  createFiles('./src/', { index: entrypoint() }, true);
+  writeFileSync('./tsconfig.json', tsconfig, { flag: 'w+' });
   defaultServicesStrap();
 }
 
@@ -60,18 +63,26 @@ function defaultServicesStrap() {
   const mainDir = baseDir + 'auth/';
   const schemasDir = mainDir + 'schemas/';
 
-  createFiles(schemasDir, {
-    request: Services.schema,
-    response: Services.schema,
-  });
+  createFiles(
+    schemasDir,
+    {
+      request: Services.schema,
+      response: Services.schema,
+    },
+    true
+  );
 
-  createFiles(mainDir, {
-    index: Services.servicesExporter,
-    repository: Services.repository,
-    routes: Services.strapRoutes('Auth'),
-    services: Services.strapService('Auth'),
-    controller: Services.starpController('Auth'),
-  });
+  createFiles(
+    mainDir,
+    {
+      index: Services.servicesExporter,
+      repository: Services.repository,
+      routes: Services.strapRoutes('Auth'),
+      services: Services.strapService('Auth'),
+      controller: Services.starpController('Auth'),
+    },
+    true
+  );
 
-  createFiles(baseDir, { index: Services.serviceEntry });
+  createFiles(baseDir, { index: Services.serviceEntry }, true);
 }

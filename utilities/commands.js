@@ -1,3 +1,4 @@
+import ora from 'ora';
 import {
   bootstrap,
   strapConfig,
@@ -5,27 +6,39 @@ import {
   handleServices,
   validateOption,
   validateServiceArgs,
+  validateDepsOption,
 } from '../utilities/index.js';
 
-import { spawn } from 'node:child_process';
+import { exec } from 'node:child_process';
+import chalk from 'chalk';
 
 const commands = ['bootstrap', 'service', 'commons', 'config'];
-const options = ['--names=', '--truncate'];
+const options = ['--names=', '--truncate', '--install-deps'];
 
 function npmInstall() {
-  const npm = spawn('npm', ['--help']);
+  const spinner = ora('Installing dependencies...').start();
+  exec(
+    'npm i @hono/zod-openapi bcryptjs dotenv prisma winston zod @scalar/hono-api-reference @hono/node-server \
+     && npm i -D @types/bcryptjs @types/node tsup tsx',
+    (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
 
-  npm.stdout.on('data', (data) => {
-    console.log('data', data.toString());
-  });
+      console.log(stdout);
 
-  npm.stderr.on('data', (data) => {
-    console.error('error', data);
-  });
+      if (stderr) {
+        console.error(stderr);
+      }
 
-  npm.on('close', (code) => {
-    console.log(`child process exited with code: ${code}`);
-  });
+      console.log(chalk.green('Dependencies installed'));
+      console.log(
+        chalk.whiteBright('Do not forget to format your bootstrapped code!')
+      );
+      spinner.stop();
+    }
+  );
 }
 
 function handleServiceCommand(args) {
@@ -51,6 +64,16 @@ function handleCommonsCommand(args) {
   }
 }
 
+function handleBootstrapCommand(args) {
+  if (args[1]) {
+    validateDepsOption(args[1]);
+    bootstrap();
+    npmInstall();
+  } else {
+    bootstrap();
+  }
+}
+
 function handleConfigCommand(args) {
   if (args[2]) {
     validateOption(args[2]);
@@ -63,8 +86,7 @@ function handleConfigCommand(args) {
 export function executeCommand(command, args) {
   switch (command) {
     case commands[0]:
-      bootstrap();
-      npmInstall();
+      handleBootstrapCommand(args);
       break;
     case commands[1]:
       handleServiceCommand(args);

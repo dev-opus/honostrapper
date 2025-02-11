@@ -1,5 +1,5 @@
 const commands = ['bootstrap', 'service', 'commons', 'config'];
-const options = ['--names=', '--truncate'];
+const options = ['--names=', '--truncate', '--install-deps'];
 
 export function validateArgs(args) {
   if (args.length > 3) {
@@ -43,6 +43,12 @@ export function validateServiceArgs(args) {
 
 export function validateOption(option) {
   if (option !== options[1]) {
+    throw new Error('Unsupported option: ' + option);
+  }
+}
+
+export function validateDepsOption(option) {
+  if (option !== options[2]) {
     throw new Error('Unsupported option: ' + option);
   }
 }
