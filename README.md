@@ -4,6 +4,10 @@ Honostrapper is a CLI tool designed to bootstrap and manage various services, co
 
 This README provides an overview of the available commands and their usage.
 
+## Reference
+
+This CLI is designed to enhance the experience of following the [tutorial](https://github.com/dev-opus/honostrapper) in this article. It aims to streamline the setup process, reduce manual steps, and eliminate potential pitfalls. By automating configurations and providing helpful boilerplates, it ensures a smoother integration of Hono with OpenAPI/Swagger. The goal is to make the tutorial more accessible and efficient for developers.
+
 ## Installation
 
 To install Honostrapper, clone the repository and install the dependencies:
