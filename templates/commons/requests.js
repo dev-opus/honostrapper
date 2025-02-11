@@ -22,8 +22,8 @@ export function paginationQueryRequest() {
     .partial()
     .openapi({
       example: {
-        skip: 2,
-        take: 25
+        skip: '2',
+        take: '25'
       }
     });
 }

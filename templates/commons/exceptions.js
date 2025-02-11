@@ -27,7 +27,7 @@ export class NotFoundException extends HTTPException {
 
 export class MalformedEntityException extends HTTPException { 
   constructor(casue: ZodIssue[], message?: string) {
-    super(422, {message: message || 'Malformed Entity', casue: formatZodIssues(casue)});
+    super(422, {message: message || 'Malformed Entity', cause: formatZodIssues(casue)});
   }
 }
 

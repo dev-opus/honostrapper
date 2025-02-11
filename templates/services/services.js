@@ -11,7 +11,6 @@ class ${name}Service extends Service {
   }
 }
 
-export default new ${name}Service('${name}');
-
+export default new ${name}Service('${name}Service');
 `;
 }
