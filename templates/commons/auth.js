@@ -35,13 +35,9 @@ export class AuthModule {
    * Sign JWT Token
    *
    */
-  static async signToken(params: {
-    sub: string;
-    role: string;
-    account: string;
-  }) {
+  static async signToken(sub: string) {
     const payload = {
-      ...params,
+      sub,
       exp: Math.floor(Date.now() / 1000) + 1296000,
     };
 

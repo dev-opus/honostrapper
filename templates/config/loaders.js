@@ -1,5 +1,4 @@
-export const loaders = `
-import { env } from './env';
+export const loaders = `import { env } from './env';
 import { logger } from '../commons';
 import { PrismaClient } from '@prisma/client';
 

@@ -1,8 +1,15 @@
-export const logger = `import { env } from '../config';
+export const logger = `import path from 'node:path';
+import { env } from '../config';
+import { existsSync, mkdirSync } from 'node:fs';
 import { createLogger, transports, format } from 'winston';
 
 const { combine, timestamp, prettyPrint, errors } = format;
-const logDir = env.node_env === 'prod' ? '/app/logs' : 'logs';
+
+const logDir = path.join(process.cwd(), 'logs');
+
+if (!existsSync(logDir)) {
+  mkdirSync(logDir, { recursive: true });
+}
 
 const errorLogLevel = 'warn';
 const defaultLogLevel = env.log_level;
@@ -37,5 +44,4 @@ export const logger = createLogger({
     new transports.File({ filename: logDir + '/rejections.log' }),
   ],
 });
-
 `;

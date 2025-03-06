@@ -1,11 +1,11 @@
 export const tsconfig = `{
-"compilerOptions": {
+  "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "strict": true,
     "types": ["node"],
     "outDir": "dist"
-  }
+  },
 }
 `;

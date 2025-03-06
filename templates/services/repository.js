@@ -1,6 +1,4 @@
-export const repository = `
-  import { prisma } from '../../config';
+export const repository = `import { prisma } from '../../config';
 
-  export class Repository {}
-  
-  `;
+export class Repository {}  
+`;

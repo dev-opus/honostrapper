@@ -1,5 +1,4 @@
-export const hono = `
-import { OpenAPIHono } from '@hono/zod-openapi';
+export const hono = `import { OpenAPIHono } from '@hono/zod-openapi';
 import { MalformedEntityException } from '../commons';
 
 /**
@@ -24,5 +23,4 @@ export const hono = () => {
 
   return app;
 }
-
 `;

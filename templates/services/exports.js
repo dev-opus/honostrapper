@@ -1,5 +1,4 @@
-export const servicesExporter = `
-export * from './controller';
+export const servicesExporter = `export * from './controller';
 `;
 
 export const serviceEntry = `import { hono } from '../config';

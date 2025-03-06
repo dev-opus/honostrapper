@@ -16,7 +16,7 @@ export function successResponse<TData extends ZodType>(
           }),
         },
       },
-      description: 'Success response',
+      description: 'Success Response',
     };
   }
 
@@ -29,7 +29,7 @@ export function successResponse<TData extends ZodType>(
         }),
       },
     },
-    description: 'Success response',
+    description: 'Success Response',
   };
 }
 

@@ -51,7 +51,6 @@ app.onError((error:any, c) => {
   logger.warn(error)
 
   if (error instanceof HTTPException) {
-    // const res = error.getResponse()
     return c.json(
       { ok: false, message: error.message, cause: error.cause },
       error.status
@@ -67,6 +66,5 @@ app.onError((error:any, c) => {
     500
   );
 });
-
 `;
 }
